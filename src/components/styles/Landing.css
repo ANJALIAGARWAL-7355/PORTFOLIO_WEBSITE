@@ -179,6 +179,29 @@
   font-family: "Geist", sans-serif;
 }
 
+.landing-tagline {
+  margin-top: 18px;
+  max-width: 380px;
+}
+
+.landing-hero-heading {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 8px 0;
+  color: #f1f0f5;
+  letter-spacing: 0.5px;
+}
+
+.landing-hero-subtitle {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 0;
+  color: #c481ff;
+  letter-spacing: 0.8px;
+}
+
 /* .landing-intro h1 span {
    font-weight: 200; 
 } */
@@ -335,6 +358,13 @@ h2.landing-info-h2 {
     transform: translate(0%, -50%);
     right: auto;
     left: 70%;
+  }
+
+  .landing-hero-heading {
+    font-size: 17px;
+  }
+  .landing-hero-subtitle {
+    font-size: 14px;
   }
 }
 @media screen and (min-width: 1600px) {

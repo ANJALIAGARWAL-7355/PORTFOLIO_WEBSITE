@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { DRACOLoader, GLTF, GLTFLoader } from "three-stdlib";
 import { setCharTimeline, setAllTimeline } from "../../utils/GsapScroll";
 import { decryptFile } from "./decrypt";
+import { customizeFemaleCharacter } from "./femaleCharacter";
 
 const setCharacter = (
   renderer: THREE.WebGLRenderer,
@@ -36,11 +37,15 @@ const setCharacter = (
                 mesh.frustumCulled = true;
               }
             });
+            // Customize character to represent Anjali Agarwal (young Indian female college student)
+            customizeFemaleCharacter(character);
             resolve(gltf);
             setCharTimeline(character, camera);
             setAllTimeline();
-            character!.getObjectByName("footR")!.position.y = 3.36;
-            character!.getObjectByName("footL")!.position.y = 3.36;
+            const footR = character.getObjectByName("footR");
+            if (footR) footR.position.y = 3.36;
+            const footL = character.getObjectByName("footL");
+            if (footL) footL.position.y = 3.36;
             dracoLoader.dispose();
           },
           undefined,

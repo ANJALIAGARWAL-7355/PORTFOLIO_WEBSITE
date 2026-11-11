@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#18181b" stop-opacity="0.98" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c481ff" />
+      <stop offset="100%" stop-color="#7000ff" />
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="800" height="500" rx="16" fill="url(#bg)"/>
+  <rect width="800" height="500" rx="16" fill="url(#grid)"/>
+
+  <!-- Glowing background elements -->
+  <circle cx="650" cy="150" r="140" fill="#7000ff" opacity="0.25" filter="blur(40px)"/>
+  <circle cx="150" cy="380" r="100" fill="#c481ff" opacity="0.2" filter="blur(30px)"/>
+
+  <!-- Icon Graphic -->
+  <g transform="translate(400, 190) scale(1.1)">
+    <rect x="-80" y="-55" width="160" height="110" rx="10" fill="#27272a" stroke="#a855f7" stroke-width="3"/>
+       <circle cx="-62" cy="-40" r="5" fill="#ef4444"/>
+       <circle cx="-48" cy="-40" r="5" fill="#f59e0b"/>
+       <circle cx="-34" cy="-40" r="5" fill="#10b981"/>
+       <rect x="-65" y="-25" width="45" height="65" rx="5" fill="#3f3f46"/>
+       <rect x="-10" y="-25" width="75" height="30" rx="5" fill="#3f3f46"/>
+       <rect x="-10" y="15" width="75" height="25" rx="5" fill="#581c87"/>
+  </g>
+
+  <!-- Card Information -->
+  <rect x="60" y="360" width="160" height="30" rx="15" fill="rgba(196, 129, 255, 0.15)" stroke="#c481ff" stroke-width="1.5"/>
+  <text x="140" y="380" font-family="'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#c481ff" text-anchor="middle" letter-spacing="1">FULL-STACK ARCHITECTURE</text>
+
+  <text x="60" y="425" font-family="'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="bold" fill="#ffffff" letter-spacing="0.5">Full-Stack Web Platform</text>
+  <text x="60" y="455" font-family="'Segoe UI', Roboto, sans-serif" font-size="14" fill="#a1a1aa">Anjali Agarwal • AI/ML &amp; Software Engineering Project</text>
+</svg>

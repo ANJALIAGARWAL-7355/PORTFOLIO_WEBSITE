@@ -85,6 +85,19 @@
 .work-info > p {
   width: 90%;
 }
+.project-status-tag {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 12px;
+  background: rgba(196, 129, 255, 0.12);
+  border: 1px solid rgba(196, 129, 255, 0.35);
+  border-radius: 20px;
+  color: #c481ff;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
 .work-image {
   display: flex;
   width: 100%;

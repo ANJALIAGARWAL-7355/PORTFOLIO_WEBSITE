@@ -18,6 +18,11 @@ const setLighting = (scene: THREE.Scene) => {
   pointLight.castShadow = true;
   scene.add(pointLight);
 
+  // Soft key light for character portrait (face, glasses, hair)
+  const portraitLight = new THREE.DirectionalLight(0xfff5ea, 0);
+  portraitLight.position.set(0.5, 14, 16);
+  scene.add(portraitLight);
+
   new RGBELoader()
     .setPath("/models/")
     .load("char_enviorment.hdr", function (texture) {
@@ -28,7 +33,7 @@ const setLighting = (scene: THREE.Scene) => {
     });
 
   function setPointLight(screenLight: any) {
-    if (screenLight.material.opacity > 0.9) {
+    if (screenLight && screenLight.material && screenLight.material.opacity > 0.9) {
       pointLight.intensity = screenLight.material.emissiveIntensity * 20;
     } else {
       pointLight.intensity = 0;
@@ -44,6 +49,11 @@ const setLighting = (scene: THREE.Scene) => {
     });
     gsap.to(directionalLight, {
       intensity: 1,
+      duration: duration,
+      ease: ease,
+    });
+    gsap.to(portraitLight, {
+      intensity: 0.85,
       duration: duration,
       ease: ease,
     });

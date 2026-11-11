@@ -8,6 +8,10 @@ import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
 import WhatIDo from "./WhatIDo";
 import Work from "./Work";
+import SkillsSection from "./SkillsSection";
+import CSSubjects from "./CSSubjects";
+import AIMLSection from "./AIMLSection";
+import LeetCodeDSA from "./LeetCodeDSA";
 import setSplitText from "./utils/splitText";
 
 const TechStack = lazy(() => import("./TechStack"));
@@ -41,8 +45,12 @@ const MainContainer = ({ children }: PropsWithChildren) => {
             <Landing>{!isDesktopView && children}</Landing>
             <About />
             <WhatIDo />
+            <SkillsSection />
+            <CSSubjects />
+            <AIMLSection />
             <Career />
             <Work />
+            <LeetCodeDSA />
             {isDesktopView && (
               <Suspense fallback={<div>Loading....</div>}>
                 <TechStack />

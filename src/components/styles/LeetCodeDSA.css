@@ -1,0 +1,348 @@
+.leetcode-section {
+  width: var(--cWidth);
+  max-width: var(--cMaxWidth);
+  margin: 120px auto;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+.leetcode-header {
+  margin-bottom: 40px;
+}
+
+.leetcode-title-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.leetcode-icon-badge {
+  font-size: 36px;
+  color: #ffa116;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leetcode-section h2 {
+  font-size: clamp(32px, 5vw, 60px);
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.leetcode-section h2 > span {
+  color: var(--accentColor);
+}
+
+.leetcode-subtitle {
+  color: #a1a1aa;
+  font-size: 16px;
+  max-width: 750px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* Progress Card */
+.leetcode-progress-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 30px;
+  backdrop-filter: blur(10px);
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.stats-label {
+  color: #a1a1aa;
+  margin-right: 8px;
+}
+
+.stats-val {
+  color: #f4f4f5;
+  font-weight: 600;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #c481ff 0%, #a855f7 50%, #ffa116 100%);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+/* Controls */
+.leetcode-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.leetcode-search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 16px;
+  border-radius: 30px;
+  flex: 1;
+  min-width: 250px;
+  max-width: 400px;
+}
+
+.leetcode-search-box .search-icon {
+  color: #a1a1aa;
+  font-size: 20px;
+}
+
+.leetcode-search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 14px;
+  width: 100%;
+}
+
+.leetcode-difficulty-pills {
+  display: flex;
+  gap: 8px;
+}
+
+.diff-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #d4d4d8;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.diff-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.diff-pill.active {
+  background: #c481ff;
+  color: #0b080c;
+  font-weight: 600;
+  border-color: #c481ff;
+}
+
+.diff-pill.easy.active {
+  background: #10b981;
+  border-color: #10b981;
+}
+
+.diff-pill.medium.active {
+  background: #f59e0b;
+  border-color: #f59e0b;
+}
+
+.diff-pill.hard.active {
+  background: #ef4444;
+  border-color: #ef4444;
+}
+
+/* Topics Scroll */
+.leetcode-topics-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+  scrollbar-width: thin;
+}
+
+.leetcode-topics-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.leetcode-topics-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.topic-btn {
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #a1a1aa;
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.topic-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.topic-btn.active {
+  background: rgba(196, 129, 255, 0.15);
+  border-color: #c481ff;
+  color: #c481ff;
+  font-weight: 600;
+}
+
+/* Grid */
+.leetcode-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.leetcode-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.leetcode-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(196, 129, 255, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.leetcode-card.is-solved {
+  border-color: rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.02);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.problem-num {
+  font-size: 12px;
+  font-weight: 600;
+  color: #71717a;
+  letter-spacing: 0.5px;
+}
+
+.diff-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.diff-badge.easy {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.diff-badge.medium {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+}
+
+.diff-badge.hard {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+}
+
+.problem-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  color: #f4f4f5;
+  line-height: 1.4;
+}
+
+.problem-topic-tag {
+  font-size: 12px;
+  color: #a1a1aa;
+  margin-bottom: 18px;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 14px;
+}
+
+.status-toggle-btn {
+  background: transparent;
+  border: none;
+  color: #a1a1aa;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 0;
+}
+
+.status-toggle-btn:hover {
+  color: #fff;
+}
+
+.icon-solved {
+  color: #10b981;
+  font-size: 16px;
+}
+
+.icon-todo {
+  color: #71717a;
+  font-size: 16px;
+}
+
+.solve-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #c481ff;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: gap 0.2s ease;
+}
+
+.solve-link:hover {
+  gap: 7px;
+  color: #e9d5ff;
+}
+
+.no-problems-found {
+  text-align: center;
+  padding: 60px 20px;
+  color: #71717a;
+  font-size: 16px;
+}
