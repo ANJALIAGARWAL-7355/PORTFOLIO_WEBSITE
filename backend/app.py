@@ -1,45 +1,32 @@
-import os
-import re
-import sqlite3
 from datetime import datetime
-from flask import Flask, request, jsonify
+
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
+try:
+    from backend.config import settings
+    from backend.database import fetch_contact_messages, init_db, save_contact_message
+    from backend.validators import normalize_contact_payload
+except ImportError:
+    from config import settings
+    from database import fetch_contact_messages, init_db, save_contact_message
+    from validators import normalize_contact_payload
+
 app = Flask(__name__)
-# Enable CORS for local dev servers and production
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "contacts.db")
-
-def init_db():
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS contact_messages (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            email TEXT NOT NULL,
-            subject TEXT,
-            message TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-    """)
-    conn.commit()
-    conn.close()
-
-# Initialize database on startup
 init_db()
 
-EMAIL_REGEX = re.compile(r"^[\w\.-]+@([\w-]+\.)+[\w-]{2,4}$")
 
 @app.route("/api/health", methods=["GET"])
 def health():
     return jsonify({
         "status": "online",
-        "service": "Anjali Agarwal Portfolio API",
+        "service": settings.service_name,
         "timestamp": datetime.utcnow().isoformat(),
-        "database": "SQLite (contacts.db)"
+        "database": f"SQLite ({settings.db_path})",
     }), 200
+
 
 @app.route("/api/contact", methods=["POST"])
 def submit_contact():
@@ -47,61 +34,42 @@ def submit_contact():
     if not data:
         return jsonify({"success": False, "error": "Invalid JSON payload"}), 400
 
-    name = str(data.get("name", "")).strip()
-    email = str(data.get("email", "")).strip()
-    subject = str(data.get("subject", "Portfolio Inquiry")).strip()
-    message = str(data.get("message", "")).strip()
-
-    # Validation
-    errors = {}
-    if not name or len(name) < 2:
-        errors["name"] = "Name must be at least 2 characters long."
-    if not email or not EMAIL_REGEX.match(email):
-        errors["email"] = "Please provide a valid email address."
-    if not message or len(message) < 5:
-        errors["message"] = "Message must be at least 5 characters long."
-
+    normalized_payload, errors = normalize_contact_payload(data)
     if errors:
         return jsonify({"success": False, "errors": errors, "error": "Validation failed"}), 422
 
     try:
-        conn = sqlite3.connect(DB_PATH)
-        cursor = conn.cursor()
-        cursor.execute(
-            "INSERT INTO contact_messages (name, email, subject, message) VALUES (?, ?, ?, ?)",
-            (name, email, subject, message)
+        message_id = save_contact_message(
+            normalized_payload["name"],
+            normalized_payload["email"],
+            normalized_payload["subject"],
+            normalized_payload["message"],
         )
-        conn.commit()
-        msg_id = cursor.lastrowid
-        conn.close()
 
         return jsonify({
             "success": True,
-            "message": f"Thank you, {name}! Your message has been sent successfully. Anjali will get back to you soon.",
-            "messageId": msg_id
+            "message": (
+                f"Thank you, {normalized_payload['name']}! Your message has been sent successfully. "
+                "Anjali will get back to you soon."
+            ),
+            "messageId": message_id,
         }), 201
+    except Exception as exc:
+        return jsonify({
+            "success": False,
+            "error": "Internal server error saving message: " + str(exc),
+        }), 500
 
-    except Exception as e:
-        return jsonify({"success": False, "error": "Internal server error saving message: " + str(e)}), 500
 
 @app.route("/api/contact/messages", methods=["GET"])
 def list_messages():
     try:
-        conn = sqlite3.connect(DB_PATH)
-        cursor = conn.cursor()
-        cursor.execute("SELECT id, name, email, subject, message, created_at FROM contact_messages ORDER BY id DESC")
-        rows = cursor.fetchall()
-        conn.close()
-
-        messages = [
-            {"id": r[0], "name": r[1], "email": r[2], "subject": r[3], "message": r[4], "created_at": r[5]}
-            for r in rows
-        ]
+        messages = fetch_contact_messages()
         return jsonify({"success": True, "count": len(messages), "messages": messages}), 200
-    except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
+    except Exception as exc:
+        return jsonify({"success": False, "error": str(exc)}), 500
+
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    print(f"Starting Anjali Agarwal Portfolio Python Backend on port {port}...")
-    app.run(host="127.0.0.1", port=port, debug=False)
+    print(f"Starting {settings.service_name} on port {settings.port}...")
+    app.run(host=settings.host, port=settings.port, debug=False)
